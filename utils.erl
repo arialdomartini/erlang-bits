@@ -25,6 +25,8 @@ positive(N) ->
   end.
 
 
+kindly_announce(Message) -> io:format("Ladies and gentlemen.... ~p~n", [Message]).
+
 countdown() ->
-  lists:foreach(fun(N) -> io:format("Ladies and gentlemen.... ~p~n", [N]) end, [10,9,8,7,6,5,4,3,2,1,"Go!"]).
+  lists:foreach(fun(I) -> kindly_announce(I) end, [10,9,8,7,6,5,4,3,2,1,"Go!"]).
 
