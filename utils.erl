@@ -4,6 +4,7 @@
 -export([count/0]).
 -export([count/2]).
 -export([positive/1]).
+-export([countdown/0]).
 
 wc(Words) -> wc(0, Words).
 wc(Len, []) -> Len;
@@ -22,3 +23,8 @@ positive(N) ->
     true ->
       "other"
   end.
+
+
+countdown() ->
+  lists:foreach(fun(N) -> io:format("Ladies and gentlemen.... ~p~n", [N]) end, [10,9,8,7,6,5,4,3,2,1,"Go!"]).
+
