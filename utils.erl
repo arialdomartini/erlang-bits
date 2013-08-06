@@ -18,5 +18,7 @@ positive(N) ->
     N > 0 ->
       "positive";
     N < 0 ->
-      "negative"
+      "negative";
+    true ->
+      "other"
   end.
