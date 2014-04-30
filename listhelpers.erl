@@ -1,5 +1,5 @@
 -module(listhelpers).
--export([listlen/1, listlen_case/1, index/2, index_case/2]).
+-export([listlen/1, listlen_case/1, index/2, index_case/2, index_nested_case/2]).
 
 % Calculates the length of a list using tail recursion and pattern matching
 listlen([])         -> 0;
@@ -24,3 +24,17 @@ index_case(Z) ->
         {0, [X|_]}      -> X;
         {N, [_|Xs]}    -> index_case(N-1, Xs)
     end.
+
+index_nested_case(Index, List) ->
+    case Index of
+        0 ->
+            case List of
+                [Z|_]   -> Z
+            end;
+        N when N > 0 ->
+            case List of
+                [_|Zs]  -> index_nested_case(N-1, Zs)
+            end
+    end.
+            
+            
