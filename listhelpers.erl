@@ -1,6 +1,5 @@
 -module(listhelpers).
--export([listlen/1, listlen_case/1]).
-
+-export([listlen/1, listlen_case/1, index/2]).
 
 % Calculates the length of a list using tail recursion and pattern matching
 listlen([])         -> 0;
@@ -12,3 +11,7 @@ listlen_case(Y) ->
         []          -> 0;
         [_|Xs]      -> 1 + listlen_case(Xs)
     end.
+
+% Returns the item at the index specified in a list
+index(0, [X, _])    -> X;
+index(N, [_|Xs])    -> index(N-1, Xs).
