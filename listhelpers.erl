@@ -13,5 +13,6 @@ listlen_case(Y) ->
     end.
 
 % Returns the item at the index specified in a list
-index(0, [X, _])    -> X;
-index(N, [_|Xs])    -> index(N-1, Xs).
+index(N, [_|Xs]) when N>0   -> index(N-1, Xs);
+index(0, [X, _])            -> X.
+
