@@ -1,5 +1,5 @@
 -module(bif).
--export([head/0, tail/0, length/0]).
+-export([head/0, tail/0, length/0, second_item/0]).
 
 head() ->
     List = [one, two, three, four, five],
@@ -12,3 +12,7 @@ tail() ->
 length() ->
     List = [one, two, three, found, five],
     length(List).
+
+second_item() ->
+    List = [one, two, three, found, five],
+    hd(tl(List)).
