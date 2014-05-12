@@ -1,5 +1,5 @@
 -module(recursion).
--export([add_1/1, average/1, filter_even/1, exists/2, sum_recursive/1]).
+-export([add_1/1, average/1, filter_even/1, exists/2, sum_recursive/1, sum_with_accumulating_parameter/1]).
 
 add_1([]) -> [];
 add_1([Head | Tail]) -> [Head +1 | add_1(Tail)].
@@ -23,3 +23,8 @@ exists( E, [_ | T] )    -> exists(E, T).
 
 sum_recursive( [E] ) -> E;
 sum_recursive( [H|T] ) -> H + sum(T).
+
+sum_with_accumulating_parameter(List) -> sum_to(0, List).
+
+sum_to(A, [E]) -> A + E;
+sum_to(A, [H|T]) -> sum_to(A + H, T).
