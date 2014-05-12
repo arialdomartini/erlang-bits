@@ -3,6 +3,7 @@
     add_1/1, 
     add_1_with_accumulating_parameter/1, 
     average/1, 
+    average_two_accs/1,
     filter_even/1, 
     exists/2, 
     sum_recursive/1, 
@@ -56,3 +57,8 @@ zipL([X|Xs], Ys, Acc) -> zipR(Xs, Ys, [X|Acc]).
 
 zipR([], [], Acc) -> Acc;
 zipR(Xs, [Y|Ys], Acc) -> zipL(Xs, Ys, [Y|Acc]).
+
+average_two_accs(List) -> average_acc(List, 0, 0).
+
+average_acc([], Sum, Length) -> Sum / Length;
+average_acc([H|T], Sum, Length) -> average_acc(T, Sum + H, Length + 1).
