@@ -29,10 +29,10 @@ exists( E, [_ | T] )    -> exists(E, T).
 sum_recursive( [E] ) -> E;
 sum_recursive( [H|T] ) -> H + sum(T).
 
-sum_with_accumulating_parameter(List) -> sum_to(0, List).
+sum_with_accumulating_parameter(List) -> sum_acc(0, List).
 
-sum_to(A, [E]) -> A + E;
-sum_to(A, [H|T]) -> sum_to(A + H, T).
+sum_acc(A, [E]) -> A + E;
+sum_acc(A, [H|T]) -> sum_acc(A + H, T).
 
 reverse(List) -> reverse_acc(List, []).
 
