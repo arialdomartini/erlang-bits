@@ -9,7 +9,9 @@
     sum_recursive/1, 
     sum_with_accumulating_parameter/1, 
     reverse/1,
-    zip/2]).
+    zip/2,
+    sum_up_to/1
+]).
 
 add_1([]) -> [];
 add_1([Head | Tail]) -> [Head +1 | add_1(Tail)].
@@ -62,3 +64,17 @@ average_two_accs(List) -> average_acc(List, 0, 0).
 
 average_acc([], Sum, Length) -> Sum / Length;
 average_acc([H|T], Sum, Length) -> average_acc(T, Sum + H, Length + 1).
+
+
+% int sum(int boundary) {
+%    int sum = 0;
+%    for(int i=1; i<=boundary; i++;) {
+%        sum += i;
+%    }
+%    return sum;
+% }
+
+sum_up_to(N) -> sum_up_to_acc(N, 0).
+
+sum_up_to_acc(0, Sum) -> Sum;
+sum_up_to_acc(N, Sum) -> sum_up_to_acc(N-1, Sum+N).
