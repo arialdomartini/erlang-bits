@@ -4,10 +4,10 @@
 add_1([]) -> [];
 add_1([Head | Tail]) -> [Head +1 | add_1(Tail)].
 
-add_1_with_accumulating_parameter(List) -> add_1_to(List, []).
+add_1_with_accumulating_parameter(List) -> add_acc(List, []).
 
-add_1_to([], Acc) -> reverse(Acc);
-add_1_to([H|T], Acc) -> add_1_to(T, [H+1 | Acc] ).
+add_acc([], Acc) -> reverse(Acc);
+add_acc([H|T], Acc) -> add_acc(T, [H+1 | Acc] ).
 
 sum([]) -> 0;
 sum( [H|T] ) -> H + sum(T).
