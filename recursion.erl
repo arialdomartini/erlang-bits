@@ -15,5 +15,5 @@ average(List) ->
 
 filter_even([]) -> [];
 filter_even([H|T]) when H rem 2  == 0 -> [H|filter_even(T)];
-filter_even([H|T]) when H rem 2  == 1 -> filter_even(T).
+filter_even([_|T]) -> filter_even(T).
 
