@@ -10,7 +10,8 @@
     sum_with_accumulating_parameter/1, 
     reverse/1,
     zip/2,
-    sum_up_to/1
+    sum_up_to/1,
+    sum2/1
 ]).
 
 add_1([]) -> [];
@@ -78,3 +79,10 @@ sum_up_to(N) -> sum_up_to_acc(N, 0).
 
 sum_up_to_acc(0, Sum) -> Sum;
 sum_up_to_acc(N, Sum) -> sum_up_to_acc(N-1, Sum+N).
+
+
+sum2(Boundary) -> sum2_acc(1, Boundary, 0).
+
+sum2_acc(Index, Boundary, Sum) when Index =< Boundary ->
+    sum2_acc(Index+1, Boundary, Sum + Index);
+sum2_acc(_, _, Sum) -> Sum.
