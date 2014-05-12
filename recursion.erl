@@ -1,5 +1,14 @@
 -module(recursion).
--export([add_1/1, add_1_with_accumulating_parameter/1, average/1, filter_even/1, exists/2, sum_recursive/1, sum_with_accumulating_parameter/1, reverse/1]).
+-export([
+    add_1/1, 
+    add_1_with_accumulating_parameter/1, 
+    average/1, 
+    filter_even/1, 
+    exists/2, 
+    sum_recursive/1, 
+    sum_with_accumulating_parameter/1, 
+    reverse/1,
+    zip/2]).
 
 add_1([]) -> [];
 add_1([Head | Tail]) -> [Head +1 | add_1(Tail)].
@@ -38,3 +47,12 @@ reverse(List) -> reverse_acc(List, []).
 
 reverse_acc([], Acc) -> Acc;
 reverse_acc([H|T], Acc) -> reverse_acc(T, [H | Acc ]).
+
+
+zip(Xs, Ys) -> lists:reverse(zipL(Xs, Ys, [])).
+
+zipL([], [], Acc) -> Acc;
+zipL([X|Xs], Ys, Acc) -> zipR(Xs, Ys, [X|Acc]).
+
+zipR([], [], Acc) -> Acc;
+zipR(Xs, [Y|Ys], Acc) -> zipL(Xs, Ys, [Y|Acc]).
