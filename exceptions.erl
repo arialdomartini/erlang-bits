@@ -1,5 +1,5 @@
 -module (exceptions).
--export([sample/0, throw_sample/0]).
+-export([sample/0, throw_sample/0, return/1]).
 
 sample() ->
     X = 2,
@@ -14,4 +14,21 @@ throw_sample() ->
         Val -> { no_error, Val}
     catch
         throw:Error -> {throw, Error}
+    end.
+
+return_error_X(X) when X < 0 ->
+    throw({'EXIT', something});
+
+return_error_X(X) when X == 0 ->
+    1/X;
+return_error_X(X) when X > 0 ->
+    {'EXIT', {badarity, [{doo}]}}.
+
+return(X) when is_integer(X) ->
+    try return_error_X(X) of
+        Val -> {normal, Val}
+    catch
+        exit:Reason  -> {exit, Reason};
+        throw:Throw -> {throw, Throw};
+        error:Error -> {error, Error}
     end.
