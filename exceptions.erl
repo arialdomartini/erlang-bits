@@ -17,6 +17,7 @@ throw_sample() ->
     end.
 
 return_error_X(X) when X < 0 ->
+    % the format is {'EXIT', {Reason, Stack}}
     throw({'EXIT', something});
 
 return_error_X(X) when X == 0 ->
