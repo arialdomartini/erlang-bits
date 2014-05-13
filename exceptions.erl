@@ -1,5 +1,5 @@
 -module (exceptions).
--export([sample/0, throw_sample/0, return/1]).
+-export([sample/0, throw_sample/0, return/1, add/2]).
 
 sample() ->
     X = 2,
@@ -33,3 +33,11 @@ return(X) when is_integer(X) ->
         throw:Throw -> {throw, Throw};
         error:Error -> {error, Error}
     end.
+
+add(X, Y) -> 
+    test_int(X),
+    test_int(Y),
+    X + Y.
+
+test_int(Int) when is_integer(Int) -> true;
+test_int(X) -> throw({error, {not_integer, X}}).
