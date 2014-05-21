@@ -1,5 +1,5 @@
 -module(echo).
--export([go/0, loop/0]).
+-export([go/0, loop/0, go_timeout/0, exit_after_timeout/0]).
 
 go() ->
     register(echo, spawn(echo, loop, [])),
@@ -16,4 +16,18 @@ loop() ->
             From ! {self(), {received, Message} },
             loop();
         stop -> true
+    end.
+
+go_timeout() ->
+    Pid = spawn(echo, exit_after_timeout, []),
+    Pid ! {self(), foo},
+    receive 
+        message_received -> io:format("~w~n", [replied])
+    after
+        100 -> timeout
+    end.
+
+exit_after_timeout() ->
+    receive
+        { Pid, start } -> Pid ! message_received
     end.
