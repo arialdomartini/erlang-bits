@@ -2,8 +2,8 @@
 -export([go/0, loop/0]).
 
 go() ->
-    Pid = spawn(echo, loop, []),
-    Pid ! {self(), hello},
+    register(hello, spawn(echo, loop, [])),
+    hello ! {self(), hello},
     receive
         {Pid, Message} -> io:format("~w~n", [Message])
     end,
