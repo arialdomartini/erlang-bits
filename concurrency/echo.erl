@@ -7,7 +7,7 @@ go() ->
     receive
         {Pid, Message} -> io:format("~w~n", [Message])
     end,
-    Pid ! stop.
+    hello ! stop.
 
 loop() ->
     receive
