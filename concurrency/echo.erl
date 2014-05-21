@@ -12,7 +12,7 @@ go() ->
 loop() ->
     receive
         { From, Message } ->
-            From ! {self(), Message },
+            From ! {self(), {received, Message} },
             loop;
         stop -> true
     end.
