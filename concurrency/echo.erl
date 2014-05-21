@@ -7,7 +7,7 @@ go() ->
     receive
         {_Pid, Message} -> io:format("~w~n", [Message])
     end,
-    {"Run whereis(echo) then send it a stop message"}.
+    {"Run whereis(echo) then send it a stop message with echo ! stop or see the list of registered processes with regs()"}.
 
 
 loop() ->
