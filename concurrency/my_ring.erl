@@ -1,5 +1,5 @@
 -module(my_ring).
--export([start/1, start_proc/2]).
+-export([start/1, start_proc/2, benchmark/1]).
 
 start(Num) ->
     start_proc(Num, self()).
@@ -14,3 +14,6 @@ start_proc(Num, Pid) when Num > 0 ->
 
 start_proc(0, Pid) ->
     Pid ! ok.
+
+benchmark(N) ->
+    timer:tc(my_ring, start, [N]).
