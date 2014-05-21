@@ -2,17 +2,18 @@
 -export([go/0, loop/0]).
 
 go() ->
-    register(hello, spawn(echo, loop, [])),
-    hello ! {self(), hello},
+    register(echo, spawn(echo, loop, [])),
+    echo ! {self(), hello},
     receive
-        {Pid, Message} -> io:format("~w~n", [Message])
+        {_Pid, Message} -> io:format("~w~n", [Message])
     end,
-    hello ! stop.
+    {"Run whereis(echo) then send it a stop message"}.
+
 
 loop() ->
     receive
         { From, Message } ->
             From ! {self(), {received, Message} },
-            loop;
+            loop();
         stop -> true
     end.
