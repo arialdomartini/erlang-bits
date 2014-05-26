@@ -4,31 +4,37 @@
 -export([init/0]).
 
 start() ->
-    register(mutex, spawn(?MODULE, init, [])).
+    register(mutex, spawn(?MODULE, init, [])),
+    io:format("Mutex started~n").
 
 stop() ->
-    mutex ! stop.
+    mutex ! stop,
+    io:format("Mutex stopped, bye.~n").
 
 
 
 % client
 
 wait() ->
+    io:format("Sending the event WAIT~n"),
     mutex ! {wait, self()},
     receive
         ok -> ok
     end.
 
 signal() ->
+    io:format("Sending the event SIGNAL~n"),
     mutex ! {signal, self()}.
 
 
 % mutex
 
 init() ->
+    io:format("Initializing the mutex~n"),
     free().
 
 free() ->
+    io:format("Entered the state FREE~n"),
     receive
         {wait, Pid} ->
             Pid ! ok,
@@ -38,6 +44,7 @@ free() ->
     end.
 
 busy(Pid) ->
+    io:format("Entered the state BUSY~n"),
     receive
         {signal, Pid} ->
             free()
