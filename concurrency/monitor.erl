@@ -15,10 +15,10 @@ do() ->
     end.
 
 crash() ->
-    erlang:monitor(process, other),
+    Reference = erlang:monitor(process, other),
     other ! {request, self(), crash},
     receive
-        {'DOWN', _Reference, process, Pid, Reason} -> 
+        {'DOWN', Reference, process, Pid, Reason} -> 
             io:format("Oh, ~w crashed because ~w", [Pid, Reason]);
         Other -> Other
     end.
