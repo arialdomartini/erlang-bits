@@ -33,7 +33,7 @@ loop() ->
             Pid ! {reply, ok},
             loop();
         {request, _Pid, crash} ->
-            1/0
+            exit(my_reasons)
     end.
 
 
