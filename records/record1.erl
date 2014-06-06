@@ -11,7 +11,7 @@ test2() ->
 joe() ->
     #person{name = "Joe", age = 21, phone ="0573-278271"}.
 
-birthday(#person{age=Age} = Person) ->
+birthday(Person = #person{age=Age} ) ->
     Person#person{age = Age + 1}.
 
 showPerson(Person) ->
