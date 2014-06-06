@@ -3,17 +3,28 @@
 -record(person, {name, age, phone}).
 
 test1() ->
-    showPerson(joe()).
+    Person = joe(),
+    showPerson(Person),
+    showPerson(birthday(Person)).
+
 
 test2() ->
-    showPerson(birthday(joe())).
+    Person = anne(),
+    showPerson(Person),
+    showPerson(birthday(Person)).
+
 
 joe() ->
     #person{name = "Joe", age = 21, phone ="0573-278271"}.
 
-birthday(Person = #person{age=Age} ) ->
-    Person#person{age = Age + 1}.
+anne() ->
+    #person{name = "Anne", age = 71, phone = "0573/892028"}.
+
+birthday(#person{age=Age, name="Joe"} = Person) ->
+    Person#person{age = Age + 1};
+birthday(#person{} = Person) ->
+    Person.
 
 showPerson(Person) ->
-    io:format("name: ~p, age: ~p, phone: ~p", [Person#person.name, Person#person.age, Person#person.phone]).
+    io:format("name: ~p, age: ~p, phone: ~p~n", [Person#person.name, Person#person.age, Person#person.phone]).
 
