@@ -1,5 +1,5 @@
 -module(record1).
--export([test1/0, test2/0]).
+-export([test1/0, test2/0, test_equality_records_tuples/0]).
 -record(person, {name, age, phone}).
 -record(name, {first, surname}).
 
@@ -13,6 +13,9 @@ test2() ->
     Person = anne(),
     showPerson(Person),
     showPerson(birthday(Person)).
+
+test_equality_records_tuples() ->
+    joe() == {person, {name, "Joe", "Capioca"}, 21, "0573-278271"}.
 
 
 joe() ->
