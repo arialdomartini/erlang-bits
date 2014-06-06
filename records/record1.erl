@@ -1,6 +1,7 @@
 -module(record1).
 -export([test1/0, test2/0]).
 -record(person, {name, age, phone}).
+-record(name, {first, surname}).
 
 test1() ->
     Person = joe(),
@@ -15,10 +16,10 @@ test2() ->
 
 
 joe() ->
-    #person{name = "Joe", age = 21, phone ="0573-278271"}.
+    #person{name = #name{first = "Joe", surname = "Capioca"},  age = 21, phone ="0573-278271"}.
 
 anne() ->
-    #person{name = "Anne", age = 71, phone = "0573/892028"}.
+    #person{name = #name{first = "Anne", surname = "Giannetti"},  age = 71, phone = "0573/892028"}.
 
 birthday(#person{age=Age, name="Joe"} = Person) ->
     Person#person{age = Age + 1};
