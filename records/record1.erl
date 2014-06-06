@@ -1,5 +1,5 @@
--module(record1).
--export([test1/0, test2/0, test_equality_records_tuples/0, test_equality_tuples_records/0]).
+sr~w-module(record1).
+-export([test1/0, test2/0, test_equality_records_tuples/0, test_equality_tuples_records/0, reflection/0]).
 -record(person, {name, age, phone}).
 -record(name, {first, surname}).
 
@@ -21,6 +21,8 @@ test_equality_tuples_records() ->
     Name = {name, "John", "Fante"},
     "John" == Name#name.first.
 
+reflection() ->
+    io:format("fields: ~p, size: ~p, position of field name: ~w~n", [record_info(size, person), record_info(fields, person), #person.name]).
 
 joe() ->
     #person{name = #name{first = "Joe", surname = "Capioca"},  age = 21, phone ="0573-278271"}.
