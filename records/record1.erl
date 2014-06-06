@@ -27,5 +27,5 @@ birthday(#person{} = Person) ->
     Person.
 
 showPerson(Person) ->
-    io:format("name: ~p, age: ~p, phone: ~p~n", [Person#person.name, Person#person.age, Person#person.phone]).
+    io:format("firstname: ~p, secondname: ~p,  age: ~p, phone: ~p~n", [(Person#person.name)#name.first, (Person#person.name)#name.surname, Person#person.age, Person#person.phone]).
 
