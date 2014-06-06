@@ -11,8 +11,8 @@ test2() ->
 joe() ->
     #person{name = "Joe", age = 21, phone ="0573-278271"}.
 
-birthday(Person) ->
-    Person#person{age = Person#person.age + 1}.
+birthday(#person{age=Age} = Person) ->
+    Person#person{age = Age + 1}.
 
 showPerson(Person) ->
     io:format("name: ~p, age: ~p, phone: ~p", [Person#person.name, Person#person.age, Person#person.phone]).
