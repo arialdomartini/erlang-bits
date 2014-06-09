@@ -1,14 +1,21 @@
 -module(macros).
 -export([start/0, send/1]).
 -export([init/0]).
--export([double/1]).
+-export([double/1, is_multiple/2]).
 
 -define(TIMEOUT, 2500).
 -define(FUNC, X).
 -define(TION, +X).
 
+-define(MULTIPLE(X, Y), X rem Y == 0).
+
 double(X) ->
     ?FUNC?TION.
+
+is_multiple(A, B) when ?MULTIPLE(A,B) ->
+    true;
+is_multiple(_A, _B) ->
+    false.
 
 start() ->
     process_flag(trap_exit, true),
