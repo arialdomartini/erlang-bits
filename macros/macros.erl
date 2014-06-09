@@ -1,9 +1,14 @@
 -module(macros).
 -export([start/0, send/1]).
 -export([init/0]).
+-export([double/1]).
 
 -define(TIMEOUT, 2500).
+-define(FUNC, X).
+-define(TION, +X).
 
+double(X) ->
+    ?FUNC?TION.
 
 start() ->
     process_flag(trap_exit, true),
