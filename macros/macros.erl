@@ -8,11 +8,13 @@
 -define(TION, +X).
 
 -define(MULTIPLE(X, Y), X rem Y == 0).
+-define(DBG(Str, Args), io:format(Str, Args)).
 
 double(X) ->
     ?FUNC?TION.
 
 is_multiple(A, B) when ?MULTIPLE(A,B) ->
+    ?DBG("Got these values: ~p and ~p~n", [A, B]),
     true;
 is_multiple(_A, _B) ->
     false.
