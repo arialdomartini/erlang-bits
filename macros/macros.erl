@@ -3,21 +3,7 @@
 -export([init/0]).
 -export([double/1, is_multiple/2]).
 
--define(TIMEOUT, 2500).
--define(FUNC, X).
--define(TION, +X).
-
--define(MULTIPLE(X, Y), X rem Y == 0).
-
-% you can activate and disable debugging by compiling this module with
-% c(macros, [{d, debug}]). % enable
-% c(macros, [{u, debug}]). % disable
--ifdef(debug).
-    -define(DBG(Str, Args), io:format(Str, Args)).
--else.
-    -define(DBG(Str, Args), ok).
--endif.
-
+-include("macro-definitions.hrl").
 -define(VALUE(Call), io:format("~p = ~p~n", [??Call, Call])).
 
 double(X) ->
