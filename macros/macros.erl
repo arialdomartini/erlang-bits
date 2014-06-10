@@ -1,5 +1,5 @@
 -module(macros).
--export([start/0, send/1]).
+-export([start/0, send/1, list_all_macros/0]).
 -export([init/0]).
 -export([double/1, is_multiple/2]).
 
@@ -20,6 +20,9 @@ is_multiple(A, B) when ?MULTIPLE(A,B) ->
     true;
 is_multiple(_A, _B) ->
     false.
+
+list_all_macros() ->
+    io:format("?MODULE: ~p~n?MODULE_STRING: ~p~n?FILE: ~p~n?LINE: ~p~n?MACHINE: ~p~n", [?MODULE, ?MODULE_STRING, ?FILE, ?LINE, ?MACHINE]).
 
 start() ->
     process_flag(trap_exit, true),
