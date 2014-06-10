@@ -8,7 +8,16 @@
 -define(TION, +X).
 
 -define(MULTIPLE(X, Y), X rem Y == 0).
--define(DBG(Str, Args), io:format(Str, Args)).
+
+% you can activate and disable debugging by compiling this module with
+% c(macros, [{d, debug}]). % enable
+% c(macros, [{u, debug}]). % disable
+-ifdef(debug).
+    -define(DBG(Str, Args), io:format(Str, Args)).
+-else.
+    -define(DBG(Str, Args), ok).
+-endif.
+
 -define(VALUE(Call), io:format("~p = ~p~n", [??Call, Call])).
 
 double(X) ->
@@ -18,7 +27,8 @@ is_multiple(A, B) when ?MULTIPLE(A,B) ->
     ?DBG("Got these values: ~p and ~p~n", [A, B]),
     ?VALUE(length([1,2,3])),
     true;
-is_multiple(_A, _B) ->
+is_multiple(A, B) ->
+    ?DBG("Got these values: ~p and ~p~n", [A, B]),
     false.
 
 list_all_macros() ->
