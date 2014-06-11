@@ -1,6 +1,6 @@
 -module(db).
 -export([new/0, write/3, read/2, delete/2, destroy/1]).
--export([test/0]).
+-export([test/0, info/0]).
 -vsn(1.2).
 
 new() ->
@@ -30,3 +30,6 @@ test() ->
     io:format("Get this value and perform a db:read(kent, Db2)~n"),
     
     Db2.
+
+info() ->
+    db:module_info().
