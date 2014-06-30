@@ -14,23 +14,23 @@ stop() ->
 % Server
 
 init() ->
-    loop(dict:new()).
+    loop(db:new()).
 
 loop(Db) ->
     receive
         {ugrade, Data} -> 
-            NewDb = dict:convert(Data, Db),
+            NewDb = db:convert(Data, Db),
             db_server:loop(NewDb);
         {write, Key, Data} -> 
-            loop(dict:store(Key, Data, Db));
+            loop(db:write(Key, Data, Db));
         {read, Pid, Key} -> 
-            Read = dict:find(Key, Db),
+            Read = db:read(Key, Db),
             Pid ! Read,
             loop(Db);
         {delete, Key} ->
-            NewDb = dict:delete(Key, Db),
+            NewDb = db:delete(Key, Db),
             loop(NewDb);
-        {stop} -> dict:destroy(Db)
+        {stop} -> db:destroy(Db)
     end.
 
 % Client API
