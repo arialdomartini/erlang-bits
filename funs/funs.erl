@@ -9,10 +9,11 @@ run() ->
 direct() ->
     (fun(Int) -> Int + 1 end)(4).
 
+map(_,[]) -> [];
+map(F, [X|Xs]) -> [ F(X) | map(F, Xs) ].
 
-double_all([]) -> [];
-double_all([X|Xs]) -> [X*2 | double_all(Xs)].
-    
+double_all(List) -> map( fun(X) -> X*2 end, List).
 
-plus1_all([]) -> [];
-plus1_all([X|Xs]) -> [X + 1 | plus1_all(Xs)].
+plus1_all(List) -> map (fun(X) -> X+1 end ,List).
+
+
