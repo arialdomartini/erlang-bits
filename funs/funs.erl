@@ -1,5 +1,5 @@
 -module(funs).
--export([run/0, direct/0, double_all/1, plus1_all/1, evens/1, palindroms/1]).
+-export([run/0, direct/0, double_all/1, plus1_all/1, evens/1, palindroms/1, print_all/1]).
 
 run() ->
     Bump = fun(Int) ->
@@ -35,3 +35,13 @@ filter(F, [X | Xs]) ->
         true -> [ X | filter(F, Xs)];
         _ -> filter(F, Xs)
     end. 
+
+
+foreach([], _) -> ok;
+foreach([X | Xs], F) -> 
+    F(X),
+    foreach(Xs, F).
+
+
+print_all(X) ->
+    foreach(X, fun(Item)-> io:format("element: ~p~n", [Item]) end).
