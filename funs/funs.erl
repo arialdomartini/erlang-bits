@@ -13,7 +13,7 @@ map(_,[]) -> [];
 map(F, [X|Xs]) -> [ F(X) | map(F, Xs) ].
 
 
-double_all(List) -> map( double, List).
+double_all(List) -> map( times(2), List).
 
 plus1_all(List) -> map (fun(X) -> X+1 end ,List).
 
