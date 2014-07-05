@@ -1,5 +1,6 @@
 -module(funs).
--export([run/0, direct/0, double_all/1, plus1_all/1, evens/1, palindroms/1, print_all/1, multiply/2]).
+-export([run/0, direct/0, double_all/1, plus1_all/1, evens/1, palindroms/1, print_all/1, multiply/2, palindrom2/0]).
+-export([is_a_palindrom/1]).
 
 run() ->
     Bump = fun(Int) ->
@@ -26,6 +27,8 @@ reverse_acc([X|Xs], Acc) -> reverse_acc(Xs, [X | Acc]).
 
 evens(X)      -> filter(fun(A) -> A rem 2 == 0    end, X).
     
+
+
 palindroms(X) -> filter(fun(A) -> A == reverse(A) end, X).
     
 
@@ -53,3 +56,11 @@ times(N) ->
 multiply(A, B) ->
     F = times(B),
     F(A).
+
+
+is_a_palindrom(A) ->
+    A == reverse(A).
+
+palindrom2() ->
+    All = [ [1,1], [1,2,1], [1,2,3]],
+    filter(fun funs:is_a_palindrom/1, All).
