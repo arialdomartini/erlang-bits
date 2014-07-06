@@ -63,4 +63,5 @@ is_a_palindrom(A) ->
 
 palindrom2() ->
     All = [ [1,1], [1,2,1], [1,2,3]],
-    filter(fun funs:is_a_palindrom/1, All).
+    F = fun funs:is_a_palindrom/1,
+    filter(F, All).
