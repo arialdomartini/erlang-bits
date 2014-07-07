@@ -4,6 +4,7 @@
 -export([allows/1]).
 -export([map/0]).
 -export([double/1]).
+-export([partition/0, is_female/1]).
 
 is_greater_than(X, Y) ->
     X > Y.
@@ -27,3 +28,21 @@ double(X) ->
 map() ->
     X = [1,2,3,4],
     lists:map(fun lists_demo:double/1, X).
+
+
+is_female({_, female}) ->
+    true;
+is_female({_, male}) ->
+    false.
+
+partition() ->
+    People = [ 
+               {john, male},
+               {jane, female},
+               {tarzan, male},
+               {karl, male},
+               {bjorne, male},
+               {lucrezia, female}
+              ],
+    Separated = lists:partition(fun lists_demo:is_female/1, People),
+    io:format("~p~n", [Separated]).
