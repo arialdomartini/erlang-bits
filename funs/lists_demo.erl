@@ -2,6 +2,8 @@
 -export([all/0, any/0]).
 -export([is_greater_than/2]).
 -export([allows/1]).
+-export([map/0]).
+-export([double/1]).
 
 is_greater_than(X, Y) ->
     X > Y.
@@ -18,3 +20,10 @@ allows(X) ->
 any() ->
     X = [no, nada, niet, yes],
     {X, lists:any(fun lists_demo:allows/1, X)}.
+
+double(X) ->
+    X * 2.
+
+map() ->
+    X = [1,2,3,4],
+    lists:map(fun lists_demo:double/1, X).
