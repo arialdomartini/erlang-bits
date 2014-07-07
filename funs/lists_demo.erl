@@ -5,6 +5,7 @@
 -export([map/0]).
 -export([double/1]).
 -export([partition/0, is_female/1]).
+-export([lazy_list/0]).
 
 is_greater_than(X, Y) ->
     X > Y.
@@ -46,3 +47,15 @@ partition() ->
               ],
     Separated = lists:partition(fun lists_demo:is_female/1, People),
     io:format("~p~n", [Separated]).
+
+
+
+next(Value) ->
+    fun() -> [Value | next(Value+1)] end.
+
+lazy_list() ->
+    Numbers = next(10),
+    [A | Rest] = Numbers(),
+    io:format("~w~n", [A]),
+    [B | _ ] = Rest(),
+    io:format("~w~n", [B]).
