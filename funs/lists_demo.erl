@@ -61,4 +61,4 @@ lazy_list() ->
     io:format("~w~n", [B]).
 
 list_comprehension() ->
-    [ X || X <- [1,2,3,4,5] ].
+    [ X *2 || X <- [1,2,3,4,5] ].
