@@ -88,4 +88,4 @@ group() ->
     [ {Nation, [Person || {Person, Nat} <-Db, Nat == Nation  ]} || {_, Nation} <- Db  ].
 
 multiple_generators() ->
-    [{X,Y} || X <- lists:seq(1,5), Y <- lists:seq(1,5)].
+    [{X,Y} || X <- lists:seq(1,6), X rem 2 == 0, Y <- lists:seq(1,6), Y rem 2 == 1].
