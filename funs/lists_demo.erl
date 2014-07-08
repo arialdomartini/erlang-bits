@@ -5,7 +5,7 @@
 -export([map/0]).
 -export([double/1]).
 -export([partition/0, is_female/1]).
--export([lazy_list/0, list_comprehension/0]).
+-export([lazy_list/0, list_comprehension/0, extract/0]).
 
 is_greater_than(X, Y) ->
     X > Y.
@@ -60,5 +60,16 @@ lazy_list() ->
     [B | _ ] = Rest(),
     io:format("~w~n", [B]).
 
+
 list_comprehension() ->
     [ X *2 || X <- [1,2,3,4,5], X rem 2 == 0 ].
+
+extract() ->
+    Db = [
+          {mario, italia},
+          {john, great_britain},
+          {fabien, france},
+          {nikita, japan}
+         ],
+    [Name || {Name, _Nation} <- Db ].
+    
