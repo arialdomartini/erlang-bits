@@ -5,7 +5,7 @@
 -export([map/0]).
 -export([double/1]).
 -export([partition/0, is_female/1]).
--export([lazy_list/0, list_comprehension/0, extract/0, group/0]).
+-export([lazy_list/0, list_comprehension/0, extract/0, group/0, multiple_generators/0]).
 
 is_greater_than(X, Y) ->
     X > Y.
@@ -86,3 +86,6 @@ group() ->
           {ani, japan}
          ],
     [ {Nation, [Person || {Person, Nat} <-Db, Nat == Nation  ]} || {_, Nation} <- Db  ].
+
+multiple_generators() ->
+    [{X,Y} || X <- lists:seq(1,5), Y <- lists:seq(1,5)].
