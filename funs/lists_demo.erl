@@ -5,7 +5,7 @@
 -export([map/0]).
 -export([double/1]).
 -export([partition/0, is_female/1]).
--export([lazy_list/0, list_comprehension/0, extract/0]).
+-export([lazy_list/0, list_comprehension/0, extract/0, group/0]).
 
 is_greater_than(X, Y) ->
     X > Y.
@@ -73,3 +73,16 @@ extract() ->
          ],
     [Name || {Name, _Nation} <- Db ].
     
+group() ->
+    Db = [
+          {mario, italia},
+          {john, great_britain},
+          {fabien, france},
+          {nikita, japan},
+          {giulia, italia},
+          {lucrezia, italia},
+          {maryjane, great_britain},
+          {luisette, france},
+          {ani, japan}
+         ],
+    [ {Nation, [Person || {Person, Nat} <-Db, Nat == Nation  ]} || {_, Nation} <- Db  ].
