@@ -4,4 +4,6 @@
 
 run() ->
     Set = ets:new(sample, []),
-    ets:info(Set).
+    Info = ets:info(Set),
+    ets:delete(Set),
+    Info.
