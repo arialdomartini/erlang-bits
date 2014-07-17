@@ -21,6 +21,11 @@ remote_call() ->
 
 
 ping() ->
-    io:format(">> Start an Erlang node with~n   erl -sname foo -setcookie cake~n"),
+    io:format(">> Start an Erlang node with~n   erl -sname foo -setcookie cake~n~n"),
     erlang:set_cookie(node(), 'cake'),
-    net_adm:ping('foo@macaco').
+    Response = net_adm:ping('foo@macaco'),
+    io:format("Using the cookie 'cake' the reply is '~w'~n", [Response]),
+    erlang:set_cookie(node(), 'barbaz'),
+    NewResponse = net_adm:ping('foo@macaco'),
+    io:format("Even if I changed the cookie to 'barbaz' the reply is still '~w'~n", [NewResponse]).
+    
