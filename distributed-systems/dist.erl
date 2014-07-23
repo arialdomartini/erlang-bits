@@ -31,10 +31,12 @@ ping() ->
     
 
 remote_call(Message, Node) ->
+    monitor_node(Node, true),
     {facserver, Node} ! {self(), Message},
     receive
         {ok, Response} ->
-            Response
-    after 1000 ->
-            {error, timeout}
+            monitor_node(Node, false),
+            Response;
+        {nodedown, Node} ->
+            {error, node_down}
     end.
