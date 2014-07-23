@@ -1,5 +1,5 @@
 -module(dist).
--export([remote_call/0, init/0, ping/0]).
+-export([remote_call/0, init/0, ping/0, remote_call/2]).
 
 init() ->
     loop().
@@ -29,3 +29,10 @@ ping() ->
     NewResponse = net_adm:ping('foo@macaco'),
     io:format("Even if I changed the cookie to 'barbaz' the reply is still '~w'~n", [NewResponse]).
     
+
+remote_call(Message, Node) ->
+    {server, Node} ! {self(), Message},
+    receive
+        {ok, Response} ->
+            Response
+    end.
