@@ -1,6 +1,6 @@
 -module(usr).
 -export([create_tables/0, ensure_loaded/0, write_record/0]). 
--export([add_usr/3, read_usr/1, delete_usr/1]).
+-export([add_usr/3, read_usr/1, delete_usr/1, set_service/3]).
 -include("usr.hrl").
 
 
@@ -39,3 +39,20 @@ delete_usr(CustId) ->
                      mnesia:delete({usr, Usr#usr.msisdn}) end
         end,
     {atomic, Result} = mnesia:transaction(F), Result.
+
+
+set_service(CustId, Service, Flag) when Flag==true; Flag==false -> 
+    Fun = fun() ->
+                case mnesia:index_read(usr, CustId, id) of 
+                    [] -> 
+                        {error, instance};
+                    [Usr] ->
+                        Services = lists:delete(Service, Usr#usr.services), 
+                        NewServices = case Flag of
+                                          true -> [Service|Services];
+                                          false -> Services 
+                                      end,
+                        mnesia:write(Usr#usr{services=NewServices}) end
+        end,
+    {atomic, Result} = mnesia:transaction(Fun), 
+    Result.
