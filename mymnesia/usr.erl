@@ -1,6 +1,6 @@
 -module(usr).
 -export([create_tables/0, ensure_loaded/0, write_record/0]). 
--export([add_usr/3]).
+-export([add_usr/3, read_usr/1]).
 -include("usr.hrl").
 
 
@@ -25,3 +25,7 @@ add_usr(PhoneNo, CustId, Plan) when Plan==prepay; Plan==postpay ->
     Fun = fun() -> mnesia:write(Rec) end,
     {atomic, Res} = mnesia:transaction(Fun), 
     Res. 
+
+read_usr(Oid) ->
+    {atomic, Usr} = mnesia:transaction(fun() -> mnesia:read({usr, Oid}) end),
+    Usr.
