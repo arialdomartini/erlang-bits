@@ -1,6 +1,6 @@
 -module(usr).
 -export([create_tables/0, ensure_loaded/0, write_record/0]). 
--export([add_usr/3, read_usr/1]).
+-export([add_usr/3, read_usr/1, delete_usr/1]).
 -include("usr.hrl").
 
 
@@ -29,3 +29,13 @@ add_usr(PhoneNo, CustId, Plan) when Plan==prepay; Plan==postpay ->
 read_usr(Oid) ->
     {atomic, Usr} = mnesia:transaction(fun() -> mnesia:read({usr, Oid}) end),
     Usr.
+
+delete_usr(CustId) ->
+    F = fun() ->
+             case mnesia:index_read(usr, CustId, id) of
+                 [] ->
+                      {error, instance};
+                 [Usr] -> 
+                     mnesia:delete({usr, Usr#usr.msisdn}) end
+        end,
+    {atomic, Result} = mnesia:transaction(F), Result.
